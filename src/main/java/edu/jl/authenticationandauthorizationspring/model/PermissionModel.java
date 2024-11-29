@@ -11,15 +11,16 @@ import java.util.Objects;
 public class PermissionModel implements GrantedAuthority{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "permission_id")
+    private Long id;
 
-    private String description;
+    private String authority;
 
     public PermissionModel() {
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public PermissionModel(String authority) {
+        this.authority = authority;
     }
 
     public long getId() {
@@ -32,7 +33,7 @@ public class PermissionModel implements GrantedAuthority{
 
     @Override
     public String getAuthority() {
-        return this.description;
+        return this.authority;
     }
 
     @Override
@@ -40,11 +41,11 @@ public class PermissionModel implements GrantedAuthority{
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         PermissionModel that = (PermissionModel) object;
-        return id == that.id && Objects.equals(description, that.description);
+        return Objects.equals(id, that.id) && Objects.equals(authority, that.authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description);
+        return Objects.hash(id, authority);
     }
 }
