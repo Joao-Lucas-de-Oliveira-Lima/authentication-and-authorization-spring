@@ -19,7 +19,7 @@ public class UserModel implements UserDetails {
     @Column(unique = true)
     private String username;
     private String password;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_permission",
             joinColumns = {@JoinColumn(name = "user_id")},
