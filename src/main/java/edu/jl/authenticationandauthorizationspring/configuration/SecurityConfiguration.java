@@ -22,11 +22,11 @@ import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfiguration {
     private final JwtTokenProvider tokenProvider;
 
     @Autowired
-    public SecurityConfig(JwtTokenProvider tokenProvider) {
+    public SecurityConfiguration(JwtTokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
 
