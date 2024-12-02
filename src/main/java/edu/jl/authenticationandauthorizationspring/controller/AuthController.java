@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -28,9 +30,14 @@ public class AuthController {
     public ResponseEntity<TokenDto> login(
             @RequestBody @Valid AccountCredentialsDto accountCredentialsDto,
             BindingResult bindingResult) throws BadRequestException {
-        if(bindingResult.hasErrors()){
-            throw new BadRequestException("Campos incorretos!");
+        //todo Reference
+        if (bindingResult.hasErrors()) {
+            String errorMessage = bindingResult.getFieldErrors().stream()
+                    .map(error -> error.getField() + ": " + error.getDefaultMessage())
+                    .collect(Collectors.joining(", "));
+            throw new BadRequestException("Invalid fields: " + errorMessage);
         }
-        return ResponseEntity.ok(authServiceImplementation.login(accountCredentialsDto));
+        TokenDto token = authServiceImplementation.login(accountCredentialsDto);
+        return ResponseEntity.ok(token);
     }
 }
