@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -21,7 +22,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Component
 public class JwtTokenProvider {
     @Value("${security.jwt.token.secret}")
     private String secret;
@@ -75,7 +76,7 @@ public class JwtTokenProvider {
                 .strip();
     }
 
-    public Authentication getAuthentication(String token){
+    public Authentication getAuthentication(String token) {
         DecodedJWT decodedJWT = decodedToken(token);
         UserDetails userDetails = userService.loadUserByUsername(decodedJWT.getSubject());
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
@@ -86,25 +87,24 @@ public class JwtTokenProvider {
         return jwtVerifier.verify(token);
     }
 
-    public String resolveToken(HttpServletRequest request){
+    public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        if(bearerToken != null && bearerToken.startsWith("Bearer ")){
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring("Bearer ".length());
         }
         return null;
     }
 
-    public Boolean validateToken(String token) throws InvalidJwtAuthenticationException{
+    public Boolean validateToken(String token) throws InvalidJwtAuthenticationException {
         DecodedJWT decodedJWT = decodedToken(token);
         try {
-            if(decodedJWT.getExpiresAt().before(new Date())){
+            if (decodedJWT.getExpiresAt().before(new Date())) {
                 throw new InvalidJwtAuthenticationException("Token expired!");
             }
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new InvalidJwtAuthenticationException("Invalid token!");
         }
     }
-
 
 }
