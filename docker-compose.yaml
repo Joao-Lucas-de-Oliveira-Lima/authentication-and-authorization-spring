@@ -17,3 +17,9 @@ services:
       POSTGRES_DB: db
     ports:
       - 3003:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - ${ADMINER_PORT:-8082}:8080

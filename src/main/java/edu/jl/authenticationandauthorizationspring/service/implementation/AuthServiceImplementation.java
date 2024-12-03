@@ -2,6 +2,7 @@ package edu.jl.authenticationandauthorizationspring.service.implementation;
 
 import edu.jl.authenticationandauthorizationspring.dto.security.AccountCredentialsDto;
 import edu.jl.authenticationandauthorizationspring.dto.security.TokenDto;
+import edu.jl.authenticationandauthorizationspring.service.AuthService;
 import edu.jl.authenticationandauthorizationspring.service.UserService;
 import edu.jl.authenticationandauthorizationspring.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AuthServiceImplementation {
+public class AuthServiceImplementation implements AuthService {
 
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;

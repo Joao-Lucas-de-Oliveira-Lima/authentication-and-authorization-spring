@@ -2,6 +2,7 @@ package edu.jl.authenticationandauthorizationspring.controller;
 
 import edu.jl.authenticationandauthorizationspring.dto.security.AccountCredentialsDto;
 import edu.jl.authenticationandauthorizationspring.dto.security.TokenDto;
+import edu.jl.authenticationandauthorizationspring.service.AuthService;
 import edu.jl.authenticationandauthorizationspring.service.implementation.AuthServiceImplementation;
 import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
@@ -19,11 +20,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthServiceImplementation authServiceImplementation;
+    private final AuthService authService;
 
     @Autowired
-    public AuthController(AuthServiceImplementation authServiceImplementation) {
-        this.authServiceImplementation = authServiceImplementation;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/login")
@@ -37,7 +38,7 @@ public class AuthController {
                     .collect(Collectors.joining(", "));
             throw new BadRequestException("Invalid fields: " + errorMessage);
         }
-        TokenDto token = authServiceImplementation.login(accountCredentialsDto);
+        TokenDto token = authService.login(accountCredentialsDto);
         return ResponseEntity.ok(token);
     }
 }
