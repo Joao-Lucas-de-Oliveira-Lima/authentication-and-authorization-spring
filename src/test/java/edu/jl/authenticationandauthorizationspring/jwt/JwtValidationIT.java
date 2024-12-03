@@ -1,4 +1,4 @@
-package edu.jl.authenticationandauthorizationspring.controller;
+package edu.jl.authenticationandauthorizationspring.jwt;
 
 import edu.jl.authenticationandauthorizationspring.mock.JwtMock;
 import io.restassured.RestAssured;

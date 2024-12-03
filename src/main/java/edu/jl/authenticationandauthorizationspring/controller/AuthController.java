@@ -4,6 +4,8 @@ import edu.jl.authenticationandauthorizationspring.dto.security.AccountCredentia
 import edu.jl.authenticationandauthorizationspring.dto.security.CreateUserDto;
 import edu.jl.authenticationandauthorizationspring.dto.security.TokenDto;
 import edu.jl.authenticationandauthorizationspring.service.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Authentication", description = "Endpoints for user authentication and registration")
 public class AuthController {
 
     private final AuthService authService;
@@ -29,6 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
+    @Operation(summary = "User Login", description = "Authenticate user and return access token", tags = "Authentication")
     public ResponseEntity<TokenDto> login(
             @RequestBody @Valid AccountCredentialsDto accountCredentialsDto,
             BindingResult bindingResult) throws BadRequestException {
@@ -43,6 +47,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "User Registration", description = "Register a new user and return access token", tags = "Authentication")
     public ResponseEntity<TokenDto> register(
             @RequestBody @Valid CreateUserDto createUserDto,
             BindingResult bindingResult) throws BadRequestException {
