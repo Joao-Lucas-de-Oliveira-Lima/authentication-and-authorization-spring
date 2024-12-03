@@ -32,17 +32,14 @@ public class JwtTokenProvider {
 
     private Algorithm algorithm;
 
-    private final UserService userService;
-
     @Autowired
-    public JwtTokenProvider(UserService userService) {
-        this.userService = userService;
-    }
+    private UserService userService;
+
 
     @PostConstruct
     protected void init() {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
-        algorithm = Algorithm.HMAC256(secret.getBytes());
+        algorithm = Algorithm.HMAC512(secret.getBytes());
     }
 
     public TokenDto getAccessToken(String username, List<String> roles) {
@@ -95,8 +92,8 @@ public class JwtTokenProvider {
     }
 
     public Boolean validateToken(String token) throws InvalidJwtAuthenticationException {
-        DecodedJWT decodedJWT = decodedToken(token);
         try {
+            DecodedJWT decodedJWT = decodedToken(token);
             if (decodedJWT.getExpiresAt().before(new Date())) {
                 throw new InvalidJwtAuthenticationException("Token expired!");
             }

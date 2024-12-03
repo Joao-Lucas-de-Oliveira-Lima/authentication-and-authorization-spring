@@ -14,13 +14,13 @@ public class CreateUserDto implements Serializable {
     private final static long serialVersionUID = 1L;
     @NotBlank
     @Pattern(
-            regexp = "^[a-zA-Z0-9]{8,}$",
+            regexp = "^.{8,}$",
             message = "Username must be at least 8 characters long and contain only letters and numbers."
     )
     private String username;
     @NotBlank
     @Pattern(
-            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\p{Alnum}])[\\p{Alnum}\\p{Punct}\\p{S}çÇ]{8,}$",
             message = "Password must be at least 8 characters long, including one uppercase letter, one lowercase letter, one number, and one special character."
     )
     private String password;
