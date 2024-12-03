@@ -38,6 +38,12 @@ public class UserModel implements UserDetails {
     public UserModel() {
     }
 
+    public UserModel(String username, String password, List<PermissionModel> permissions) {
+        this.username = username;
+        this.password = password;
+        this.permissions = permissions;
+    }
+
     public void setAccountNonExpired(boolean accountNonExpired) {
         isAccountNonExpired = accountNonExpired;
     }

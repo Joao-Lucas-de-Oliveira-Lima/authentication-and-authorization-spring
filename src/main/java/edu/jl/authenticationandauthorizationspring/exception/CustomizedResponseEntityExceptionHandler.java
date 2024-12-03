@@ -21,7 +21,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDto> handlerException(WebRequest webRequest, Exception exception){
         return ResponseEntity
-                .status(HttpStatus.FORBIDDEN)
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(buildExceptionDto(webRequest, exception));
     }
 
@@ -48,6 +48,20 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ExceptionDto> handlerBadRequestException(WebRequest webRequest, Exception exception){
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(buildExceptionDto(webRequest, exception));
+    }
+
+    @ExceptionHandler(NoRegisteredRoleException.class)
+    public ResponseEntity<ExceptionDto> handlerNoRegisteredException(WebRequest webRequest, Exception exception){
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(buildExceptionDto(webRequest, exception));
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ExceptionDto> handlerUserAlreadyExistsException(WebRequest webRequest, Exception exception){
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(buildExceptionDto(webRequest, exception));

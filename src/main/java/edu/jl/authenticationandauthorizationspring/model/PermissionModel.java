@@ -16,6 +16,7 @@ public class PermissionModel implements GrantedAuthority{
 
     private String authority;
 
+
     public PermissionModel() {
     }
 
