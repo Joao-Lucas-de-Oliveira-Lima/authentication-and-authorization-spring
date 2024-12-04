@@ -10,6 +10,10 @@ public class AuthenticationAndAuthorizationSpringApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(AuthenticationAndAuthorizationSpringApplication.class, args);
         PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
-
+        String password = "tesT123_+";
+        String encryptedPassword = passwordEncoder.encode("tesT123_+");
+        if(passwordEncoder.matches(password, encryptedPassword)){
+            System.out.println(encryptedPassword);
+        }
     }
 }
