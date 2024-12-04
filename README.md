@@ -5,6 +5,9 @@ This project is a REST API developed with Spring Boot for user authentication an
 
 ## Table of Contents
 
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Steps to Install](#steps-to-install)
 - [Overview](#overview)
   - [Entities](#entities)
     - [Users](#users)
@@ -12,9 +15,6 @@ This project is a REST API developed with Spring Boot for user authentication an
   - [Authentication](#authentication)
   - [Password Persistence](#password-persistence)
   - [Authorization](#authorization)
-- [Installation](#installation)
-  - [Prerequisites](#prerequisites)
-  - [Steps to Install](#steps-to-install)
 - [Creating a Custom Password](#creating-a-custom-password)
 - [Tests](#tests)
 - [Documentation](#documentation)
@@ -30,9 +30,9 @@ This project is a REST API developed with Spring Boot for user authentication an
 
 Ensure you have the following tools installed on your system:
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) - To run the PostgreSQL database.
-- [Java JDK 21](https://www.oracle.com/br/java/technologies/downloads/#java21) - Required to build and run the Spring Boot application.
-- [Apache Maven 3+](https://maven.apache.org/download.cgi) - For building and managing the project.
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [Java JDK 21](https://www.oracle.com/br/java/technologies/downloads/#java21)
+- [Apache Maven 3+](https://maven.apache.org/download.cgi)
 
 ### Steps to Install
 
@@ -65,9 +65,6 @@ mvn spring-boot:run
 The system adheres to Spring conventions for managing users and permissions by defining two primary entities: `UserModel` and `PermissionModel`. A third intermediate table, `user_permission`, is specified within the `UserModel` entity to store the many-to-many relationship between users and permissions.
 
 #### Users
-The `UserModel` class implements `UserDetails`, providing a series of getter methods for 
-attributes defined by Spring conventions. Among these, the most important are `getUsername` 
-and `getPassword`.
 ```java
 public class UserModel implements UserDetails {
     @Id 
@@ -102,7 +99,6 @@ public class UserModel implements UserDetails {
 ```
 
 #### Permissions
-The `PermissionModel` implements `GrantedAuthority` to represent the authorities assigned to users.
 
 ```java
 public class PermissionModel implements GrantedAuthority {
@@ -172,6 +168,7 @@ public PasswordEncoder passwordEncoder() {
 
 Authorization is implemented using Spring Security's `SecurityFilterChain`, which defines the access control policies, and a custom `JwtTokenFilter` to validate JWTs and authenticate incoming requests.
 
+#### SecurityFilterChain
 ```java
 SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     JwtTokenFilter jwtTokenFilter = new JwtTokenFilter(tokenProvider);
@@ -192,6 +189,19 @@ SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Except
                     .requestMatchers("/api/v1/**").authenticated()
             )
             .build();
+}
+```
+#### JwtTokenFilter
+```java
+public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+      String token = jwtTokenProvider.resolveToken((HttpServletRequest) servletRequest);
+      if (token != null && jwtTokenProvider.validateToken(token)) {
+          Authentication authentication = jwtTokenProvider.getAuthentication(token);
+          if (authentication != null) {
+              SecurityContextHolder.getContext().setAuthentication(authentication);
+          }
+      }
+      filterChain.doFilter(servletRequest, servletResponse);
 }
 ```
 
