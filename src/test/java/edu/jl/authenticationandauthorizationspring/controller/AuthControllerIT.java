@@ -95,7 +95,7 @@ class AuthControllerIT extends UserMock {
     @DisplayName("Should not login and get access token when username is null")
     void loginWithNullUsername() {
         AccountCredentialsDto accountCredentials =
-                new AccountCredentialsDto(adminUserWithUsernameNull.getUsername(), adminUserWithUsernameNull.getPassword());
+                new AccountCredentialsDto(adminUserWithNullUsername.getUsername(), adminUserWithNullUsername.getPassword());
 
         given()
                 .contentType(ContentType.JSON)
@@ -110,7 +110,7 @@ class AuthControllerIT extends UserMock {
     @DisplayName("Should not login and get access token when username is empty")
     void loginWithEmptyUsername() {
         AccountCredentialsDto accountCredentials =
-                new AccountCredentialsDto(adminUserWithUsernameEmpty.getUsername(), adminUserWithUsernameEmpty.getPassword());
+                new AccountCredentialsDto(adminUserWithEmptyUsername.getUsername(), adminUserWithEmptyUsername.getPassword());
 
         given()
                 .contentType(ContentType.JSON)
@@ -125,7 +125,7 @@ class AuthControllerIT extends UserMock {
     @DisplayName("Should not login and get access token when username is a blank string")
     void loginWithBlankUsername() {
         AccountCredentialsDto accountCredentials =
-                new AccountCredentialsDto(adminUserWithUsernameBlank.getUsername(), adminUserWithUsernameBlank.getPassword());
+                new AccountCredentialsDto(adminUserWithBlankUsername.getUsername(), adminUserWithBlankUsername.getPassword());
 
         given()
                 .contentType(ContentType.JSON)

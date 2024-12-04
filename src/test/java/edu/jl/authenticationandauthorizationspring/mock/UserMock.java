@@ -6,7 +6,6 @@ import edu.jl.authenticationandauthorizationspring.model.UserModel;
 import java.util.List;
 
 public abstract class UserMock {
-    //Users já cadastrados no banco de dados via migrations
     protected UserModel validAdminUser = new UserModel(
                     "first_admin",
                     "23ldb)-3678Bvmd_@34lmvn*9344pldknbvh3&&*3499kjnD",
@@ -15,7 +14,7 @@ public abstract class UserMock {
                     new PermissionModel("ROLE_GUEST"))
 
     );
-    protected UserModel adminUserWithUsernameNull = new UserModel(
+    protected UserModel adminUserWithNullUsername = new UserModel(
             null,
             "23ldb)-3678Bvmd_@34lmvn*9344pldknbvh3&&*3499kjnD",
             List.of(
@@ -23,7 +22,7 @@ public abstract class UserMock {
                     new PermissionModel("ROLE_GUEST"))
 
     );
-    protected UserModel adminUserWithUsernameEmpty = new UserModel(
+    protected UserModel adminUserWithEmptyUsername = new UserModel(
             "",
             "23ldb)-3678Bvmd_@34lmvn*9344pldknbvh3&&*3499kjnD",
             List.of(
@@ -31,7 +30,7 @@ public abstract class UserMock {
                     new PermissionModel("ROLE_GUEST"))
 
     );
-    protected UserModel adminUserWithUsernameBlank = new UserModel(
+    protected UserModel adminUserWithBlankUsername = new UserModel(
             "            ",
             "23ldb)-3678Bvmd_@34lmvn*9344pldknbvh3&&*3499kjnD",
             List.of(
@@ -69,7 +68,6 @@ public abstract class UserMock {
             List.of(new PermissionModel("ROLE_GUEST"))
     );
 
-    //Users ainda não cadastrados no banco de dados
     protected UserModel validNewUser = new UserModel(
             "new_user",
             "slfsd*(*@@dfljffKK*6vCF",

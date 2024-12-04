@@ -12,6 +12,9 @@ This project is a REST API built with Spring Boot, designed to handle user authe
   - [Authentication](#authentication)
   - [Password Persistence](#password-persistence)
   - [Authorization](#authorization)
+- [Installation](#installation)
+  - [Prerequisites](#prerequisites)
+  - [Steps to Install](#steps-to-install)
 - [Creating a Custom Password](#creating-a-custom-password)
 - [Tests](#tests)
 - [Documentation](#documentation)
@@ -21,9 +24,37 @@ This project is a REST API built with Spring Boot, designed to handle user authe
 
 ---
 
+## Installation
+
+### Prerequisites
+
+Ensure you have the following tools installed on your system:
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) - To run the PostgreSQL database.
+- [Java JDK 21](https://www.oracle.com/br/java/technologies/downloads/#java21) - Required to build and run the Spring Boot application.
+- [Apache Maven 3+](https://maven.apache.org/download.cgi) - For building and managing the project.
+
+### Steps to Install
+
+Follow these steps to set up and run the application:
+
+1. **Start the PostgreSQL Database**
+   Navigate to the root directory of the project and run:
+```bash
+docker-compose up -d
+```
+2. **Build the Project** Clean and build the project using Maven:
+```bash
+mvn clean install
+```
+
+3. **Run the Application** Start the Spring Boot application:
+```bash
+mvn spring-boot:run
+```
+
 ## Overview
 
-This project implements a secure API using Spring Boot. Key functionalities include:
 - **Authentication**: Stateless user authentication using JWTs with HMAC512 signature.
 - **Authorization**: Role-based and permission-based access control.
 - **Password Management**: Secure password storage using PBKDF2 with HMAC-SHA512.
