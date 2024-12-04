@@ -1,7 +1,7 @@
 
 # Authentication and Authorization Spring
 
-This project is a REST API built with Spring Boot, designed to handle user authentication and authorization. It uses JSON Web Tokens (JWT) for stateless and secure authentication, while leveraging Spring Security to manage roles, permissions, and access control for various endpoints.
+This project is a REST API developed with Spring Boot for user authentication and authorization. It uses Java JWT for secure, stateless authentication and Spring Security to manage roles, permissions, and endpoint access control.
 
 ## Table of Contents
 
@@ -62,11 +62,12 @@ mvn spring-boot:run
 
 ### Entities
 
-The system follows Spring conventions for user and permission management, with two primary entities: `User` and `Permission`, and a third intermediary table defined within the `User` entity, called `user_permission`, which stores the relationship between users and permissions.
+The system adheres to Spring conventions for managing users and permissions by defining two primary entities: `UserModel` and `PermissionModel`. A third intermediate table, `user_permission`, is specified within the `UserModel` entity to store the many-to-many relationship between users and permissions.
 
 #### Users
-The `UserModel` implements `UserDetails` and manages user-specific information and relationships with permissions.
-
+The `UserModel` class implements `UserDetails`, providing a series of getter methods for 
+attributes defined by Spring conventions. Among these, the most important are `getUsername` 
+and `getPassword`.
 ```java
 public class UserModel implements UserDetails {
     @Id 
@@ -86,6 +87,16 @@ public class UserModel implements UserDetails {
         inverseJoinColumns = {@JoinColumn(name = "permission_id")}
     )
     private List<PermissionModel> permissions;
+    
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+  
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
     //...
 }
 ```
@@ -101,6 +112,11 @@ public class PermissionModel implements GrantedAuthority {
     private Long id;
 
     private String authority;
+
+    @Override
+    public String getAuthority() {
+        return this.authority;
+    }
     //...
 }
 ```
