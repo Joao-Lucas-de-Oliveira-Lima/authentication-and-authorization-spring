@@ -1,5 +1,7 @@
 
 # Authentication and Authorization Spring
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Joao-Lucas-de-Oliveira-Lima_spring-redis-cache&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Joao-Lucas-de-Oliveira-Lima_spring-redis-cache) ![example workflow](https://github.com/Joao-Lucas-de-Oliveira-Lima/authentication-and-authorization-spring/actions/workflows/main.yaml/badge.svg)
+
 
 This project is a REST API developed with Spring Boot for user authentication and authorization. It uses Java JWT for secure, stateless authentication and Spring Security to manage roles, permissions, and endpoint access control.
 
@@ -18,9 +20,9 @@ This project is a REST API developed with Spring Boot for user authentication an
 - [Creating a Custom Password](#creating-a-custom-password)
 - [Tests](#tests)
 - [Documentation](#documentation)
+  - [Swagger](#swagger-documentation)
   - [Main Endpoints](#main-endpoints)
   - [Example Usage](#example-usage)
-  - [Swagger](#swagger-documentation)
 
 ---
 
@@ -249,10 +251,11 @@ Interactive API documentation is available at:
 
 ### Main Endpoints
 
-- **POST /auth/login**: Authenticate and return an access token.
-- **POST /auth/register**: Register a user and return an access token.
-- **GET /api/v1/users/greetings**: Return a greeting for authenticated admins.
-
+```text
+POST /auth/login - Authenticate and return an access token.
+POST /auth/register - Register a user and return an access token.
+GET /api/v1/users/greetings - Return a greeting for authenticated admins.
+```
 ### Example Usage
 
 **Login**
