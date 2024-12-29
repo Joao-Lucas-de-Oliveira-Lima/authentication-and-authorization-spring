@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class SwaggerIT {
+class SwaggerIT {
 
     @LocalServerPort
     private int port;
@@ -50,7 +50,7 @@ public class SwaggerIT {
 
     @Test
     @DisplayName("Verify Swagger UI is loading correctly")
-    public void shouldVerifySwaggerUI() {
+    void shouldVerifySwaggerUI() {
         given()
                 .contentType(ContentType.JSON)
                 .when()
@@ -62,7 +62,7 @@ public class SwaggerIT {
 
     @Test
     @DisplayName("Verify API documentation is available at /v3/api-docs")
-    public void shouldVerifyApiDocsEndpoint() {
+    void shouldVerifyApiDocsEndpoint() {
         given()
                 .contentType(ContentType.JSON)
                 .when()

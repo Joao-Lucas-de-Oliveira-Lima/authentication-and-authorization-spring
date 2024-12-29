@@ -389,6 +389,6 @@ class AuthControllerIT extends UserMock {
                 .when()
                 .post("/auth/register")
                 .then()
-                .statusCode(400);
+                .statusCode(401);
     }
 }

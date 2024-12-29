@@ -27,10 +27,17 @@
 		<url/>
 	</scm>
 	<properties>
-		<spring.datasource.username>user</spring.datasource.username>
-		<spring.datasource.password>password</spring.datasource.password>
-		<spring.datasource.url>jdbc:postgresql://localhost:3003/db</spring.datasource.url>
+		<sonar.organization>joao-lucas-de-oliveira-lima</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<java.version>21</java.version>
+		<rest-assured.version>5.5.0</rest-assured.version>
+		<java-jwt.version>4.4.0</java-jwt.version>
+		<flyway.version>11.0.0</flyway.version>
+		<spring-boot-testcontainers.version>3.3.4</spring-boot-testcontainers.version>
+		<springdoc-openapi-starter-webmvc-ui.version>2.7.0</springdoc-openapi-starter-webmvc-ui.version>
+		<lombok.version>1.18.36</lombok.version>
+		<maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
+		<jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -66,7 +73,7 @@
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
-			<version>5.5.0</version>
+			<version>${rest-assured.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -82,17 +89,17 @@
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
-			<version>4.4.0</version>
+			<version>${java-jwt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
-			<version>11.0.0</version>
+			<version>${flyway.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-database-postgresql</artifactId>
-			<version>11.0.0</version>
+			<version>${flyway.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -108,14 +115,21 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-testcontainers</artifactId>
-			<version>3.3.4</version>
+			<version>${spring-boot-testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.7.0</version>
+			<version>${springdoc-openapi-starter-webmvc-ui.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 	</dependencies>
 
@@ -126,27 +140,33 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<version>8.0.0</version>
-				<configuration>
-					<url>${spring.datasource.url}</url>
-					<user>${spring.datasource.username}</user>
-					<password>${spring.datasource.password}</password>
-					<locations>
-						<location>classpath:db/migration</location>
-					</locations>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>3.5.2</version>
+				<version>${maven-failsafe-plugin.version}</version>
 				<executions>
 					<execution>
 						<goals>
 							<goal>integration-test</goal>
 							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>

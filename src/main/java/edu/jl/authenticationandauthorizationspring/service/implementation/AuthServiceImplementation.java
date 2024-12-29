@@ -7,22 +7,19 @@ import edu.jl.authenticationandauthorizationspring.exception.NoRegisteredRoleExc
 import edu.jl.authenticationandauthorizationspring.exception.UserAlreadyExistsException;
 import edu.jl.authenticationandauthorizationspring.model.PermissionModel;
 import edu.jl.authenticationandauthorizationspring.model.UserModel;
+import edu.jl.authenticationandauthorizationspring.security.JwtTokenProvider;
 import edu.jl.authenticationandauthorizationspring.service.AuthService;
 import edu.jl.authenticationandauthorizationspring.service.PermissionService;
 import edu.jl.authenticationandauthorizationspring.service.UserService;
-import edu.jl.authenticationandauthorizationspring.security.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,14 +59,12 @@ public class AuthServiceImplementation implements AuthService {
 
             List<String> roles = userDetails.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
-                    .collect(Collectors.toList());
+                    .toList();
 
             return jwtTokenProvider.getAccessToken(username, roles);
 
-        } catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException("Invalid username: " + username);
-        } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Incorrect password for username: " + username);
+        } catch (Exception e) {
+            throw new BadCredentialsException("Invalid credentials. Please check your login information and try again.");
         }
     }
 
@@ -79,7 +74,7 @@ public class AuthServiceImplementation implements AuthService {
         List<String> roles = createUserDto.getRoles();
 
         if (userService.existsByUsername(username)) {
-            throw new UserAlreadyExistsException("The username is already in use!");
+            throw new BadCredentialsException("Invalid credentials. Please check your login information and try again.");
         }
 
         Map<String, PermissionModel> registeredPermissions = permissionService.getPermissionsMap();
