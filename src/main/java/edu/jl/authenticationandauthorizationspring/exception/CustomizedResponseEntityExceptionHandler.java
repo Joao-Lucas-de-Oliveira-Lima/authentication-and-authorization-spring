@@ -32,13 +32,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
                 .body(buildExceptionDto(webRequest, exception));
     }
 
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity<ExceptionDto> handlerUsernameNotFoundException(WebRequest webRequest, Exception exception){
-        return ResponseEntity
-                .status(HttpStatus.UNAUTHORIZED)
-                .body(buildExceptionDto(webRequest, exception));
-    }
-
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ExceptionDto> handlerBadCredentialsException(WebRequest webRequest, Exception exception){
         return ResponseEntity
@@ -57,13 +50,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     public ResponseEntity<ExceptionDto> handlerNoRegisteredException(WebRequest webRequest, Exception exception){
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(buildExceptionDto(webRequest, exception));
-    }
-
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    public ResponseEntity<ExceptionDto> handlerUserAlreadyExistsException(WebRequest webRequest, Exception exception){
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
                 .body(buildExceptionDto(webRequest, exception));
     }
 
