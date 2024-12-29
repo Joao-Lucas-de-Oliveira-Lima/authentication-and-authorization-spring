@@ -34,7 +34,7 @@ Ensure you have the following tools installed on your system:
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Java JDK 21](https://www.oracle.com/br/java/technologies/downloads/#java21)
-- [Apache Maven 3+](https://maven.apache.org/download.cgi)
+- [Apache Maven 3.x or later](https://maven.apache.org/download.cgi)
 
 ### Steps to Install
 
