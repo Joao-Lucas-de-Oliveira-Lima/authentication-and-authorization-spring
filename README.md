@@ -20,7 +20,7 @@ This project is a REST API developed with Spring Boot for user authentication an
 - [Documentation](#documentation)
   - [Main Endpoints](#main-endpoints)
   - [Example Usage](#example-usage)
-  - [Swagger](#swagger)
+  - [Swagger](#swagger-documentation)
 
 ---
 
@@ -242,6 +242,11 @@ Ensure Docker is running for TestContainers.
 
 ## Documentation
 
+### Swagger Documentation
+Interactive API documentation is available at:
+- **Swagger UI:** `/swagger-ui/index.html`
+- **API Documentation in JSON:** `/v3/api-docs`
+
 ### Main Endpoints
 
 - **POST /auth/login**: Authenticate and return an access token.
@@ -278,9 +283,4 @@ Content-Type: application/json
 GET /api/v1/users/greetings
 Authorization: Bearer your_access_token
 ```
-
-### Swagger
-
-Interactive documentation is available at `/swagger-ui/index.html`. API specification can be accessed at `/v3/api-docs`.
-
 ---
