@@ -1,6 +1,13 @@
 # Authentication and Authorization with Spring Boot
 
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white) ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white) ![SonarQube](https://img.shields.io/badge/SonarQube-black?style=for-the-badge&logo=sonarqube&logoColor=4E9BCD) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![Java](https://img.shields.io/badge/Java-%23F89820.svg?style=for-the-badge&logo=openjdk&logoColor=white) 
+![Spring](https://img.shields.io/badge/Spring-%238BC34A.svg?style=for-the-badge&logo=spring&logoColor=white) 
+![JWT](https://img.shields.io/badge/JWT-%237E57C2.svg?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white) 
+![Postgres](https://img.shields.io/badge/PostgreSQL-%234285F4.svg?style=for-the-badge&logo=postgresql&logoColor=white) 
+![Swagger](https://img.shields.io/badge/Swagger-%238D6E63.svg?style=for-the-badge&logo=swagger&logoColor=white) 
+![SonarQube](https://img.shields.io/badge/SonarQube-%234E9BCD.svg?style=for-the-badge&logo=sonarqube&logoColor=white) 
+![Docker](https://img.shields.io/badge/Docker-%232496ED.svg?style=for-the-badge&logo=docker&logoColor=white)
+
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Joao-Lucas-de-Oliveira-Lima_spring-redis-cache&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Joao-Lucas-de-Oliveira-Lima_spring-redis-cache) ![Workflow Status](https://github.com/Joao-Lucas-de-Oliveira-Lima/authentication-and-authorization-spring/actions/workflows/main.yaml/badge.svg)
 
